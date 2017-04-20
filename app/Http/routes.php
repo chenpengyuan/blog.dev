@@ -15,19 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', function () {
-    return "Page: About";
-});
+Route::get('post/{id}','PostsController@index'); //controllers
 
-Route::get('/contact', function () {
-    return "Page: Contact";
-});
+Route::resource('posts','PostsController');
 
-Route::get('/post/{id}/{name}', function ($id,$name) {
-    return "Page: Contact" . $id .",Name:" . $name;
-});
-
-// Route::get('/demo', function () {
-//     //return view('welcome');
-//     return "Hello World";
+// Route::get('/about', function () {
+//     return "Page: About";
 // });
+
+// Route::get('/contact', function () {
+//     return "Page: Contact";
+// });
+
+// Route::get('/post/{id}/{name}', function ($id,$name) {
+//     return "Page: Contact" . $id .",Name:" . $name;
+// });
+
+// // Route::get('/demo', function () {
+// //     //return view('welcome');
+// //     return "Hello World";
+// // });
