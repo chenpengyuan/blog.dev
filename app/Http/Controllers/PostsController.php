@@ -70,10 +70,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -81,8 +81,17 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    // public function destroy($id)
+    // {
+    //     //
+    // }
+
+    public function showContact(){
+        return view('contact');
+    }
+
+    public function showPost($category,$date,$id){
+        //return view('post')->with('id',$id);
+        return view('post',compact('category','date','id'));
     }
 }

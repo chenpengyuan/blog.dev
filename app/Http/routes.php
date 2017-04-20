@@ -15,9 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('post/{id}','PostsController@index'); //controllers
+Route::get('contact', 'PostsController@showContact' );
 
-Route::resource('posts','PostsController');
+Route::get('post/{category}/{date}/{id}','PostsController@showPost');
+
+// Route::get('post/{id}','PostsController@index'); //controllers
+
+// Route::resource('posts','PostsController');
 
 // Route::get('/about', function () {
 //     return "Page: About";
