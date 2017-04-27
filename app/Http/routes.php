@@ -19,6 +19,10 @@ Route::get('contact', 'PostsController@showContact' );
 
 Route::get('post/{category}/{date}/{id}','PostsController@showPost');
 
+Route::get('error',function(){
+    return view('errors.503');
+});
+
 // Route::get('post/{id}','PostsController@index'); //controllers
 
 // Route::resource('posts','PostsController');

@@ -87,7 +87,9 @@ class PostsController extends Controller
     // }
 
     public function showContact(){
-        return view('contact');
+        $imba=['chen','peng','yuan'];
+
+        return view('contact',compact('imba'));
     }
 
     public function showPost($category,$date,$id){

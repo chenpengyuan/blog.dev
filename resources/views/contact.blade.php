@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+
+@extends('layouts.master') {{--目錄用 . --}} 
+
+@section('content')
+英霸
+@if (count($imba))
+  <ul>
+  @foreach($imba as $hero)
+
+    <li>{{$hero}}</li>
+
+   @endforeach
+  </ul> 
+@endif    
+
 
 <address>
   <strong>Twitter, Inc.</strong><br>
@@ -20,5 +26,4 @@
   <a href="mailto:#">first.last@example.com</a>
 </address>  
 
-</body>
-</html>
+@endsection('content')
