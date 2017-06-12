@@ -1,6 +1,8 @@
 <?php
 
 use App\Post;
+use App\User;
+use App\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +119,50 @@ Route::get('forcedelete/{id}',function($id){
     Post::where('id',$id)->forceDelete();
     
 });
+
+Route::get('user/{userid}/post',function($userid){
+   
+    return User::find($userid)->post->title;
+    
+});
+
+// Route::get('user/{userid}/posts',function($userid){
+//    $user = User::find($userid);
+
+//    foreach($user->posts as $post){
+//        echo $post->title. "<br>\n";
+//    }
+    
+    
+// });
+
+Route::get('post/{postid}/post',function($postid){
+   
+    return Post::find($postid)->user->name;
+    
+});
+
+Route::get('user/{userid}/role',function($userid){
+   
+//     $user = User::find($userid);
+
+//    foreach($user->roles as $role){
+//        echo $role->name. "<br>\n";
+//    }
+//以上為取用roles屬性
+
+    $role = User::find($userid)->roles()->orderBy('id','desc')->get();
+    return $role;
+    //呼叫roles()方法
+});
+
+Route::get('role/{roleid}/user',function($roleid){
+    $users = Role::find($roleid)
+        ->users()
+        ->orderBy('id','desc')
+        ->get();
+    return $users;    
+});  
 
 // Route::get('insert',function(){
 
