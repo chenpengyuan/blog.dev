@@ -3,6 +3,8 @@
 use App\Post;
 use App\User;
 use App\Role;
+use App\Country;
+use App\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,7 +164,32 @@ Route::get('role/{roleid}/user',function($roleid){
         ->orderBy('id','desc')
         ->get();
     return $users;    
-});  
+});
+
+Route::get('country/{countryid}/posts',function($countryid){
+    $country = Country::find($countryid);
+    foreach($country->posts as $post){
+        echo $post->title . "<br>\n";
+    }
+})  ;
+
+Route::get('user/{userid}/photo',function($userid){
+    $user = User::find($userid);
+    foreach($user->photos as $photo){
+        return $photo;
+        //echo $photo->path;
+    }
+})  ;
+
+Route::get('post/{postid}/photos',function($postid){
+    $post = Post::findOrFail($postid);
+    echo "文章標題:".$post->title . "<br>\n";
+    echo "圖片路徑:". "<br>\n";
+    foreach($post->photos as $photo){
+        //return $photo;  //只會回傳第一筆 JSON格式
+        echo $photo->path. "<br>\n";; //一筆一筆顯示出來
+    }
+})  ;
 
 // Route::get('insert',function(){
 
