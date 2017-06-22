@@ -5,6 +5,8 @@ use App\User;
 use App\Role;
 use App\Country;
 use App\Photo;
+use App\Tag;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -187,9 +189,29 @@ Route::get('post/{postid}/photos',function($postid){
     echo "圖片路徑:". "<br>\n";
     foreach($post->photos as $photo){
         //return $photo;  //只會回傳第一筆 JSON格式
-        echo $photo->path. "<br>\n";; //一筆一筆顯示出來
+        echo $photo->path. "<br>\n"; //一筆一筆顯示出來
     }
 })  ;
+
+Route::get('post/{postid}/tags',function($postid) {
+    $post = Post::find($postid);
+    echo "文章標題:".$post->title. "<br>\n";
+
+    foreach($post->tags as $tag){
+        echo $tag->name. "<br>\n";
+    } 
+});
+
+
+Route::get('tag/{tagid}/posts',function($tagid) {
+    $tag = Tag::find($tagid);
+    echo "標籤:".$tag->name."<br>\n";
+    echo "<ol>";
+    foreach($tag->posts as $post){
+        echo "<li>".$post->title. "</li>";
+    } 
+    echo "</ol>";
+});    
 
 // Route::get('insert',function(){
 
