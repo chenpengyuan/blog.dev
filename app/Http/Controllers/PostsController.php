@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+Use App\Post;
+
 class PostsController extends Controller
 {
     /**
@@ -16,7 +18,12 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return "Hello World ";
+        //return "Hello World ";
+        //return $request->get('title');
+        $posts = Post::all();
+        //dd(Post::all());
+        //return $posts = Post::all();
+         return view('posts.index', compact('posts'));
     }
 
     /**
@@ -27,7 +34,8 @@ class PostsController extends Controller
     public function create()
     {
         //
-        return ("postescontroller");
+        //return ("postescontroller");
+        return view("posts.create");
     }
 
     /**
@@ -39,6 +47,14 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
+        //echo $request->title;
+        //echo $request->get('fulltext');
+        //return $request->all();
+        //return $request->get('title');
+        Post::create($request->all());
+        return redirect('/posts');
+        //dd($request->all());
+
     }
 
     /**
@@ -50,6 +66,8 @@ class PostsController extends Controller
     public function show($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('posts.show',compact('post'));
     }
 
     /**
@@ -61,6 +79,8 @@ class PostsController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('posts.edit',compact('post'));
     }
 
     /**
@@ -70,10 +90,14 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    public function update(Request $request, $id)
+    {
+        //
+        $post = Post::findOrFail($id);
+        $post->update($request->all()) ;
+
+        return redirect('/posts');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -81,10 +105,14 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        //
+        $post = Post::findOrFail($id);
+        $post->delete() ;
+
+        return redirect('/posts');
+    }
 
     public function showContact(){
         $imba=['chen','peng','yuan'];
